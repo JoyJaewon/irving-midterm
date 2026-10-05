@@ -54,9 +54,9 @@ export const shots = {
     category: "Living",
   },
   living3: {
-    src: asset("living room3.webp"),
-    alt: "Living room looking toward the front entry",
-    caption: "Open living room flowing to the front entry",
+    src: asset("livingroom-furniture.png"),
+    alt: "Furnished living room with sectional sofa, fireplace and TV, looking toward the front entry",
+    caption: "Sectional seating by the fireplace, open to the front entry",
     category: "Living",
   },
   kitchen2: {
@@ -132,6 +132,7 @@ export const heroPhoto = shots.exteriorDusk.src;
 export const photos: Photo[] = [
   shots.exteriorDusk,
   shots.livingStaged,
+  shots.living3,
   shots.kitchen2,
   shots.dining1,
   shots.exteriorDay,
@@ -142,7 +143,6 @@ export const photos: Photo[] = [
   shots.backyard,
   shots.dining2,
   shots.bedroom2,
-  shots.living3,
   shots.frontDoor,
   shots.bedroom2b,
   shots.bathroom2,
