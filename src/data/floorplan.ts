@@ -17,7 +17,7 @@ export const floorLevels: FloorLevel[] = [
     summary: "Living, kitchen, dining and two bedrooms on the main level",
     image: asset("floorplan_1.webp"),
     rooms: [
-      { name: "Living room", dims: "23'11\" × 21'3\"", note: "Wood-burning fireplace, exposed beams" },
+      { name: "Living room", dims: "23'11\" × 21'3\"", note: "Exposed beams, sectional seating, smart TV" },
       { name: "Kitchen", dims: "8'11\" × 12'6\"", note: "Quartz counters, gas range" },
       { name: "Breakfast nook", dims: "9'3\" × 8'8\"", note: "Off the kitchen, patio views" },
       { name: "Dining area", dims: "12'9\" × 10'10\"", note: "Table seats ten, front-facing windows" },

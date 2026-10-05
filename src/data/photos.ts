@@ -49,8 +49,8 @@ export const shots = {
   },
   living3: {
     src: asset("livingroom-furniture.png"),
-    alt: "Furnished living room with sectional sofa, fireplace and TV, looking toward the front entry",
-    caption: "Sectional seating by the fireplace, open to the front entry",
+    alt: "Furnished living room with sectional sofa and TV, looking toward the front entry",
+    caption: "Sectional seating under exposed beams, open to the front entry",
     category: "Living",
   },
   kitchen2: {

@@ -21,11 +21,9 @@ export const property = {
 
   specs: [
     { label: "Home type", value: "Two-story single-family, painted brick" },
-    { label: "Built / renovated", value: "1968 / fully renovated 2022" },
     { label: "Interior", value: "2,782 sq ft · wood flooring throughout" },
     { label: "Lot", value: "0.28 acre corner lot, mature oaks" },
     { label: "Heating & cooling", value: "New central HVAC (2022), ceiling fans" },
-    { label: "Fireplace", value: "Wood-burning, living room" },
     { label: "Parking", value: "Attached 2-car garage, rear entry" },
     { label: "Schools", value: "Irving ISD — Lively · Dezavala · Irving High" },
   ],
@@ -170,7 +168,6 @@ export const amenities = [
       "Stacked washer & dryer",
       "Iron, steamer & cleaning supplies",
       "Central heat & air, ceiling fans",
-      "Wood-burning fireplace",
     ],
   },
   {
