@@ -78,9 +78,9 @@ export const shots = {
     category: "Kitchen & Dining",
   },
   dining1: {
-    src: asset("dining1.webp"),
-    alt: "Dining room with large front windows",
-    caption: "Dining room with large front-facing windows",
+    src: asset("dining-furniture.png"),
+    alt: "Furnished dining room with a wood table for six and large front windows",
+    caption: "Dining room — table for six beside large front-facing windows",
     category: "Kitchen & Dining",
   },
   bedroom3: {
@@ -133,6 +133,7 @@ export const photos: Photo[] = [
   shots.exteriorDusk,
   shots.livingStaged,
   shots.kitchen2,
+  shots.dining1,
   shots.exteriorDay,
   shots.bathroom1,
   shots.bedroom3,
@@ -145,7 +146,6 @@ export const photos: Photo[] = [
   shots.frontDoor,
   shots.bedroom2b,
   shots.bathroom2,
-  shots.dining1,
   shots.bedroom1,
   shots.laundry,
 ];

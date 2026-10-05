@@ -139,7 +139,7 @@ export const amenities = [
       "Dishwasher, microwave, disposal",
       "Cookware, dishes & small appliances",
       "Coffee maker & pantry basics",
-      "Dining for eight + breakfast nook",
+      "Dining for six + breakfast nook",
     ],
   },
   {
