@@ -9,8 +9,8 @@ export function Residence() {
         <div className="relative order-2 lg:order-1">
           <Reveal>
             <img
-              src={sized(shots.kitchen2.src, 1400)}
-              alt={shots.kitchen2.alt}
+              src={sized(shots.kitchen1.src, 1400)}
+              alt={shots.kitchen1.alt}
               loading="lazy"
               className="aspect-[4/5] w-full rounded-2xl object-cover sm:w-[82%]"
             />

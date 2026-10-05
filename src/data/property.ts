@@ -40,8 +40,8 @@ export const property = {
   contact: {
     name: "Your Name",
     company: "Green Oaks Stays",
-    phone: "(000) 000-0000",
-    email: "stay@example.com",
+    email: "jaewonhan20@gmail.com",
+    inquiryEmail: "jaewonhan20@gmail.com",
   },
 
   terms: {
@@ -139,7 +139,7 @@ export const amenities = [
       "Dishwasher, microwave, disposal",
       "Cookware, dishes & small appliances",
       "Coffee maker & pantry basics",
-      "Dining for six + breakfast nook",
+      "Dining table seats ten + breakfast nook",
     ],
   },
   {

@@ -20,7 +20,7 @@ export const floorLevels: FloorLevel[] = [
       { name: "Living room", dims: "23'11\" × 21'3\"", note: "Wood-burning fireplace, exposed beams" },
       { name: "Kitchen", dims: "8'11\" × 12'6\"", note: "Quartz counters, gas range" },
       { name: "Breakfast nook", dims: "9'3\" × 8'8\"", note: "Off the kitchen, patio views" },
-      { name: "Dining area", dims: "12'9\" × 10'10\"", note: "Front-facing windows" },
+      { name: "Dining area", dims: "12'9\" × 10'10\"", note: "Table seats ten, front-facing windows" },
       { name: "Bedroom", dims: "13'9\" × 16'1\"", note: "Private exterior door, near laundry" },
       { name: "Bedroom", dims: "12'10\" × 11'6\"", note: "Next to the main-floor bath" },
       { name: "Bath", dims: "9'7\" × 7'10\"", note: "Tub and vanity" },

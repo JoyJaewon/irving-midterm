@@ -1,5 +1,5 @@
 import { useState, type FormEvent, type ReactNode } from "react";
-import { ArrowRight, Mail, Phone } from "lucide-react";
+import { ArrowRight, CheckCircle2, Loader2, Mail } from "lucide-react";
 import { shots, sized } from "../data/photos";
 import { property } from "../data/property";
 import { Reveal } from "./ui";
@@ -9,28 +9,47 @@ const guestTypes = ["Healthcare professional", "Insurance / ALE housing", "Corpo
 const inputClass =
   "w-full rounded-xl border border-white/15 bg-white/5 px-4 py-3 text-sm text-white placeholder:text-white/35 outline-none transition focus:border-white/50 focus:bg-white/10";
 
+type Status = "idle" | "sending" | "sent" | "error";
+
 export function Inquiry() {
   const [guestType, setGuestType] = useState(guestTypes[0]);
-  const [sent, setSent] = useState(false);
+  const [status, setStatus] = useState<Status>("idle");
 
-  const onSubmit = (e: FormEvent<HTMLFormElement>) => {
+  const onSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const data = new FormData(e.currentTarget);
-    const lines = [
-      `Name: ${data.get("name")}`,
-      `Organization: ${data.get("organization") || "—"}`,
-      `Email: ${data.get("email")}`,
-      `Phone: ${data.get("phone") || "—"}`,
-      `Guest type: ${guestType}`,
-      `Move-in: ${data.get("movein") || "—"}`,
-      `Length of stay: ${data.get("length") || "—"}`,
-      `Guests: ${data.get("guests") || "—"}`,
-      "",
-      `${data.get("message") || ""}`,
-    ];
-    const subject = `Stay inquiry — ${property.address.street} (${guestType})`;
-    window.location.href = `mailto:${property.contact.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(lines.join("\n"))}`;
-    setSent(true);
+    const form = e.currentTarget;
+    const data = new FormData(form);
+    const field = (key: string) => String(data.get(key) || "").trim() || "—";
+
+    setStatus("sending");
+    try {
+      const res = await fetch(`https://formsubmit.co/ajax/${property.contact.inquiryEmail}`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json", Accept: "application/json" },
+        body: JSON.stringify({
+          _subject: `Stay inquiry — ${property.address.street} (${guestType})`,
+          _replyto: field("email"),
+          _template: "table",
+          _captcha: "false",
+          _honey: String(data.get("_honey") || ""),
+          Name: field("name"),
+          Organization: field("organization"),
+          Email: field("email"),
+          Phone: field("phone"),
+          "Guest type": guestType,
+          "Move-in date": field("movein"),
+          "Length of stay": field("length"),
+          Guests: field("guests"),
+          Message: field("message"),
+        }),
+      });
+      const json = await res.json().catch(() => null);
+      if (!res.ok || json?.success === false || json?.success === "false") throw new Error(json?.message);
+      form.reset();
+      setStatus("sent");
+    } catch {
+      setStatus("error");
+    }
   };
 
   return (
@@ -57,12 +76,6 @@ export function Inquiry() {
           </p>
 
           <div className="mt-12 space-y-4">
-            <a href={`tel:${property.contact.phone.replace(/[^\d+]/g, "")}`} className="group flex items-center gap-4">
-              <span className="flex h-11 w-11 items-center justify-center rounded-full border border-white/15 transition group-hover:bg-white group-hover:text-ink">
-                <Phone size={17} strokeWidth={1.5} />
-              </span>
-              <span className="text-sm text-white/85">{property.contact.phone}</span>
-            </a>
             <a href={`mailto:${property.contact.email}`} className="group flex items-center gap-4">
               <span className="flex h-11 w-11 items-center justify-center rounded-full border border-white/15 transition group-hover:bg-white group-hover:text-ink">
                 <Mail size={17} strokeWidth={1.5} />
@@ -132,15 +145,44 @@ export function Inquiry() {
               </div>
             </div>
 
+            <input type="text" name="_honey" tabIndex={-1} autoComplete="off" className="hidden" aria-hidden />
+
             <button
               type="submit"
-              className="group mt-8 inline-flex w-full items-center justify-center gap-2 rounded-full bg-white px-6 py-4 text-sm font-medium text-ink transition hover:bg-paper"
+              disabled={status === "sending"}
+              className="group mt-8 inline-flex w-full items-center justify-center gap-2 rounded-full bg-white px-6 py-4 text-sm font-medium text-ink transition hover:bg-paper disabled:cursor-wait disabled:opacity-70"
             >
-              Send inquiry
-              <ArrowRight size={16} className="transition-transform group-hover:translate-x-0.5" />
+              {status === "sending" ? (
+                <>
+                  <Loader2 size={16} className="animate-spin" />
+                  Sending…
+                </>
+              ) : (
+                <>
+                  Send inquiry
+                  <ArrowRight size={16} className="transition-transform group-hover:translate-x-0.5" />
+                </>
+              )}
             </button>
-            <p className="mt-4 text-center text-xs text-white/45">
-              {sent ? "Your email app should open with the details filled in." : "Opens your email app with your details filled in."}
+            <p role="status" aria-live="polite" className="mt-4 text-center text-xs">
+              {status === "sent" && (
+                <span className="inline-flex items-center gap-1.5 text-emerald-300">
+                  <CheckCircle2 size={14} />
+                  Thank you — your inquiry was sent. We'll reply within one business day.
+                </span>
+              )}
+              {status === "error" && (
+                <span className="text-rose-300">
+                  Something went wrong. Please email us at{" "}
+                  <a href={`mailto:${property.contact.email}`} className="underline">
+                    {property.contact.email}
+                  </a>
+                  .
+                </span>
+              )}
+              {(status === "idle" || status === "sending") && (
+                <span className="text-white/45">We'll reply within one business day.</span>
+              )}
             </p>
           </form>
         </Reveal>

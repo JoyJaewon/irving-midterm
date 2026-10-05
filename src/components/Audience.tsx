@@ -10,7 +10,7 @@ const audienceIcons: Record<string, typeof Stethoscope> = {
   corporate: Briefcase,
 };
 
-const audiencePhotos = [shots.bedroom3, shots.livingStaged, shots.kitchen2];
+const audiencePhotos = [shots.living3, shots.bedroom2, shots.dining1];
 
 export function Audience() {
   const [active, setActive] = useState(0);
